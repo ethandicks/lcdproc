@@ -162,6 +162,8 @@ static const MtxOrbModuleEntry modulelist[] = {
 	{ 0x21, "GLK128128-25", 0 },	/* ??? */
 	{ 0x22, "GLK12232-25-WBL", 0 },
 	{ 0x24, "GLK12232-25-SM", 0 },
+	{ 0x2B, "LK204-7T-1U", 0 },
+	{ 0x2C, "LK204-7T-USB", 0 },
 	{ 0x31, "LK404-AT", 0 },
 	{ 0x32, "VFD1621", 0 },	/* MOS-AV-162A ? */
 	{ 0x33, "LK402-12", 0 },
@@ -986,7 +988,7 @@ MtxOrb_get_info (Driver *drvthis)
 
 	/* Wait the specified amount of time. */
 	tv.tv_sec = 0;		/* seconds */
-	tv.tv_usec = 500;	/* microseconds */
+	tv.tv_usec = 40000;	/* microseconds */
 
 	retval = select(p->fd+1, &rfds, NULL, NULL, &tv);
 
@@ -1026,7 +1028,7 @@ MtxOrb_get_info (Driver *drvthis)
 
 	/* Wait the specified amount of time. */
 	tv.tv_sec = 0;		/* seconds */
-	tv.tv_usec = 500;	/* microseconds */
+	tv.tv_usec = 10000;	/* microseconds */
 
 	retval = select(p->fd+1, &rfds, NULL, NULL, &tv);
 
@@ -1054,7 +1056,7 @@ MtxOrb_get_info (Driver *drvthis)
 
 	/* Wait the specified amount of time. */
 	tv.tv_sec = 0;		/* seconds */
-	tv.tv_usec = 500;	/* microseconds */
+	tv.tv_usec = 10000;	/* microseconds */
 
 	retval = select(p->fd+1, &rfds, NULL, NULL, &tv);
 
