@@ -1016,12 +1016,8 @@ MtxOrb_get_info (Driver *drvthis)
 
 	/*
 	 * Read firmware revision number
-	 * TODO: check the format of a real display, because mine does not
-	 * return anything.
-	 * It is assumed that the display returns a two byte value giving
-	 * the major/minor version number.
-	 * NOTE: This is just a guess as the manual doesn't describe
-	 * the returned format.
+	 * Manual documents returning 'Byte'
+	 * NOTE: The manual doesn't describe the returned format of the returned byte
 	 */
 	memset(tmp, '\0', sizeof(tmp));
 	write(p->fd, "\x0FE" "6", 2);
@@ -1033,14 +1029,14 @@ MtxOrb_get_info (Driver *drvthis)
 	retval = select(p->fd+1, &rfds, NULL, NULL, &tv);
 
 	if (retval) {
-		if (read(p->fd, &tmp, 2) < 0)
+		if (read(p->fd, &tmp, 1) < 0)
 			report(RPT_WARNING, "%s: unable to read data", drvthis->name);
 
 	}
 	else
 		report(RPT_WARNING, "%s: unable to read device firmware revision", drvthis->name);
 
-	snprintf(buf, sizeof(buf), "Firmware Rev.: 0x%02x 0x%02x, ", tmp[0], tmp[1]);
+	snprintf(buf, sizeof(buf), "Firmware Rev.: 0x%02x, ", tmp[0]);
 	strncat(p->info, buf, sizeof(p->info) - strlen(p->info) - 1);
 
 	/*
