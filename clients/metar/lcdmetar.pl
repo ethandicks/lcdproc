@@ -181,10 +181,11 @@ print $remote "widget_add metar cloud string\n" if ($lcdheight > 4);
 
 while (1) {
 	# fetch weather information
-	print "Fetching weather information\n" if ($verbose >= 5);
 	# NOAA decomissioned weather.noaa.gov on 15-Jun-2016.
 	#my $data = get("http://weather.noaa.gov/cgi-bin/mgetmetar.pl?cccc=$site_code");
-	my $data = get("http://tgftp.nws.noaa.gov/data/observations/metar/stations/${site_code}.TXT");
+	my $wx_url = "https://tgftp.nws.noaa.gov/data/observations/metar/stations/${site_code}.TXT";
+	print "Fetching weather information from\n  '${wx_url}'\n" if ($verbose >= 5);
+	my $data = get($wx_url);
 
 	if (not $data) {
 	    warn "Can't connect to METAR source." if ($verbose >= 1);
@@ -237,7 +238,7 @@ while (1) {
 	    }
 
 	    # print out temp, dewpoint and wind values if verbosity high enough
-	    print "Formatted Temp is '${temp}${temp_u}', Dewpoint is '${dew}${dew_u}', Winds are '${wind}${wind_u} ${wind_dir}'\n" if ($verbose >= 5);
+	    print "Converted Temp is '${temp}${temp_u}', Dewpoint is '${dew}${dew_u}', Winds are '${wind}${wind_u} ${wind_dir}'\n" if ($verbose >= 5);
 
 	    # Get forecast time
 	    my $metartime = $m->TIME;
