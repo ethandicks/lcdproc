@@ -119,7 +119,7 @@ use Fcntl;
 # 0 : None (only fatal errors)
 # 1 : Warnings
 # 5 : Explain every step.
-my $verbose = 1;
+my $verbose = 5;
 
 # METAR Code for your city/region.
 my $site_code;
@@ -208,6 +208,7 @@ while (1) {
 	    # ask for the temperature(s)
 	    my $temp; my $temp_u; my $dew; my $dew_u; my $wind; my $wind_u; my $wind_dir;
 
+	    # Set temp, dewpoint, and wind values based on requested output measurement type
 	    if ($datasystem eq "nautical") {
 	    	$temp = $m->C_TEMP;
 	    	$temp_u = "C";
@@ -235,7 +236,13 @@ while (1) {
 	    	$wind_dir = $m->WIND_DIR_ENG;
 	    }
 
+	    # print out temp, dewpoint and wind values if verbosity high enough
+	    print "Formatted Temp is '${temp}${temp_u}', Dewpoint is '${dew}${dew_u}', Winds are '${wind}${wind_u} ${wind_dir}'\n" if ($verbose >= 5);
+
+	    # Get forecast time
 	    my $metartime = $m->TIME;
+
+	    # Get sky conditions and visibility
 	    my $sky = $m->SKY;
 	    my $visibility = $m->VISIBILITY;
 
