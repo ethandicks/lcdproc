@@ -30,13 +30,24 @@ and displays them via LCDproc (http://lcdproc.omnipotent.net/)
 The METAR code related of the city you want weather observations.
 
 For fun, here are some example METAR codes:
- LA     : KLAX
- Dallas : KDFW
- Detroit: KDTW
- Chicago: KMDW
- Graz/Austria (Thalerhof) : LOWG
- Quebec City: CYQB
- Amundsen-Scott South Pole Station: NZSP
+
+=over
+
+=item * LA     : KLAX
+
+=item * Dallas : KDFW
+
+=item * Detroit: KDTW
+
+=item * Chicago: KMDW
+
+=item * Graz/Austria (Thalerhof) : LOWG
+
+=item * Quebec City: CYQB
+
+=item * Amundsen-Scott South Pole Station: NZSP
+
+=back
 
 More informations about METAR codes is available at:
 https://www.weather.gov/media/wrh/mesowest/metar_decode_key.pdf
